@@ -27,17 +27,6 @@ Mitglieder** gedacht!
 
 | Voucher | Aktuell bei                       | Für n Personen |
 | ------- | --------------------------------- | -------------- |
-| 1       |                                   |                |
-| 2       |                                   |                |
-| 3       |                                   |                |
-| 4       |                                   |                |
-| 5       |                                   |                |
-| 6       |                                   |                |
-| 7       |                                   |                |
-| 8       |                                   |                |
-| 9       |                                   |                |
-| 10      |                                   |                |
-| 11      |                                   |                |
-| 12      |                                   |                |
-| 13      |                                   |                |
-| 14      |                                   |                |
+{% for voucher in vouchers -%}
+| #{{ loop.index }} | {{ voucher.owner or '' }} | {{ voucher.persons or '' }} |
+{% endfor -%}

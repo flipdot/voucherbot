@@ -7,3 +7,4 @@ DISCOURSE_CREDENTIALS = {
 }
 
 CELERY_BROKER = os.getenv('REDIS_HOST', 'redis://localhost')
+VOUCHER_CONFIG_PATH = 'voucher.yml'
