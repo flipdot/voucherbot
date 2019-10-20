@@ -1,0 +1,8 @@
+- message_id:
+  owner: '@username and their friends'
+  persons: 3
+  voucher: CHAOSXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+- message_id:
+  owner: '@otheruser and more friends'
+  persons: 5
+  voucher: CHAOSXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
