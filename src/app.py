@@ -72,7 +72,9 @@ def send_voucher_to_user(client: DiscourseClient, voucher: VoucherConfigElement)
     logging.info(f'Sending voucher to {username}')
     res = client.create_post(message_content, title='Dein 36C3 Voucher', archetype='private_message',
                              target_usernames=username)
-    voucher['message_id'] = res.get('topic_id')
+    message_id = res.get('topic_id')
+    logging.info(f'Sent, message_id is {message_id}')
+    voucher['message_id'] = message_id
 
 
 def check_for_returned_voucher(client: DiscourseClient, voucher: VoucherConfigElement) -> Optional[str]:
