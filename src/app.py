@@ -77,6 +77,15 @@ def send_voucher_to_user(client: DiscourseClient, voucher: VoucherConfigElement)
     voucher['message_id'] = message_id
 
 
+def send_message_to_user(client: DiscourseClient, voucher: VoucherConfigElement, message: str) -> None:
+    username = get_username(voucher)
+    message_id = voucher.get('message_id')
+    if not message_id:
+        return
+    logging.info(f'Sending message to {username} (Thread {message_id})')
+    client.create_post(message, topic_id=message_id)
+
+
 def check_for_returned_voucher(client: DiscourseClient, voucher: VoucherConfigElement) -> Optional[str]:
     message_id = voucher['message_id']
     posts = client.posts(message_id)
@@ -100,6 +109,7 @@ def main():
         description='Updates voucher post, sends out vouchers via PM, receives returned vouchers via PM'
     )
     parser.add_argument('--dry', action='store_true', help='do not execute POST or PUT requests')
+    parser.add_argument('--broadcast', type=str, help='send a message to all voucher owners')
 
     args = parser.parse_args()
 
@@ -115,7 +125,7 @@ def main():
     for voucher in vouchers:
         if not voucher['owner']:
             continue
-        if voucher['message_id']:
+        if voucher.get('message_id'):
             new_voucher_code = check_for_returned_voucher(client, voucher)
             if new_voucher_code:
                 logging.info(f'Voucher returned by {get_username(voucher)}')
@@ -123,6 +133,8 @@ def main():
                 voucher['owner'] = None
                 voucher['message_id'] = None
                 voucher['persons'] = None
+            if args.broadcast:
+                send_message_to_user(client, voucher, message=args.broadcast)
         else:
             send_voucher_to_user(client, voucher)
 
