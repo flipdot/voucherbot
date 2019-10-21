@@ -6,5 +6,5 @@ DISCOURSE_CREDENTIALS = {
     'host': 'https://forum.flipdot.org'
 }
 
-CELERY_BROKER = os.getenv('REDIS_HOST', 'redis://localhost')
 VOUCHER_CONFIG_PATH = 'voucher.yml'
+VOUCHER_TABLE_POST_ID = 24763  # https://forum.flipdot.org/t/voucher-36c3/3432/4

@@ -6,7 +6,7 @@ from typing import Optional, List  # , TypedDict
 from pydiscourse import DiscourseClient
 from pydiscourse.exceptions import DiscourseClientError
 
-from constants import DISCOURSE_CREDENTIALS, VOUCHER_CONFIG_PATH
+from constants import DISCOURSE_CREDENTIALS, VOUCHER_CONFIG_PATH, VOUCHER_TABLE_POST_ID
 from utils import render
 
 import locale
@@ -140,7 +140,7 @@ def main():
             send_voucher_to_user(client, voucher)
 
     post_content = render('voucher_table.md', vouchers=vouchers)
-    client.update_post(24763, post_content)  # https://forum.flipdot.org/t/voucher-36c3/3432/4
+    client.update_post(VOUCHER_TABLE_POST_ID, post_content)
 
     if args.dry:
         logging.info(f'Dry run: Config written to voucher_dryrun.yml instead of {VOUCHER_CONFIG_PATH}')
@@ -149,5 +149,5 @@ def main():
         write_voucher_config(vouchers)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
