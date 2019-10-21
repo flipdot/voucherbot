@@ -129,6 +129,7 @@ def main():
             new_voucher_code = check_for_returned_voucher(client, voucher)
             if new_voucher_code:
                 logging.info(f'Voucher returned by {get_username(voucher)}')
+                send_message_to_user(client, voucher, message=f'Prima, vielen Dank für "{new_voucher_code}"!')
                 voucher['voucher'] = new_voucher_code
                 voucher['owner'] = None
                 voucher['message_id'] = None
